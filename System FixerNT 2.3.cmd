@@ -24,13 +24,13 @@ IF NOT "%~n0"=="%proName% %proVer%" (
     exit
 )
 
+
 :: Check if VirtualTerminalLevel is already enabled
 REM reg query HKCU\Console /v VirtualTerminalLevel >nul 2>&1
 REM if %errorlevel% neq 0 (
     :: Enable VirtualTerminalLevel silently
 REM     reg add HKCU\Console /v VirtualTerminalLevel /t REG_DWORD /d 1 /f >nul 2>&1
 REM )
-
 
 rem echo Continuing with the script...
 rem pause
@@ -522,6 +522,7 @@ echo The Windows Built-In Troubleshoot:
 start ms-settings:troubleshoot
 pause
 goto MoreOpt
+
 
 REM =====================================
 REM	== OPTION 7 ==========================
