@@ -497,3 +497,16 @@ bootrec /ScanOS
 pause
 goto Opt4_Menu
 
+
+
+REM =====================================
+REM	== OPTION 5 ==========================
+REM =====================================
+:Opt5_Menu
+cls
+echo.
+echo The mdsched.exe for RAM (Windows Memory Diagnostic):
+mdsched.exe
+pause
+goto MoreOpt
+
