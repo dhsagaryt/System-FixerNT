@@ -328,3 +328,97 @@ DISM /Online /Cleanup-Image /StartComponentCleanup
 pause
 goto Opt2_Menu
 
+
+
+REM =====================================
+REM	== OPTION 3 ==========================
+REM =====================================
+:Opt3_Menu
+cls
+echo ╔══════════════════════════════════════════╗
+echo ║    [3] CHKDSK [Check Disk] for Storage   ║
+echo ╠══════════════════════════════════════════╣
+echo ║ [A] Scan only (Read-Only Mode)           ║
+echo ║ [B] Scan and Fix Errors (/f)             ║
+echo ║ [C] Scan, Fix, ^& Check Bad Sectors (/r)  ║
+echo ║ [D] Schedule CHKDSK on Next Boot         ║
+echo ║ [N] Previous Menu                        ║
+echo ╠══════════════════════════════════════════╣
+CHOICE /N /C:ABCDN /M "║ Enter your choice:"%1
+echo ╚══════════════════════════════════════════╝
+
+:: Handle user input
+IF ERRORLEVEL ==5 GOTO homWel
+IF ERRORLEVEL ==4 GOTO Opt3d
+IF ERRORLEVEL ==3 GOTO Opt3c
+IF ERRORLEVEL ==2 GOTO Opt3b
+IF ERRORLEVEL ==1 GOTO Opt3a
+goto Opt3_Menu
+
+
+REM =====================================
+REM	== OPTION 3A =========================
+:Opt3a
+cls
+echo.
+set /p drive=Enter drive letter to scan (Example: C):
+echo Scanning drive %drive%: in Read-Only mode...
+chkdsk %drive%:
+
+::IF chkdsk DONE, THEN!
+pause
+goto Opt3_Menu
+
+
+REM =====================================
+REM	== OPTION 3B =========================
+:Opt3b
+cls
+echo.
+set /p drive=Enter drive letter to scan (Example: C):
+echo Fixing %drive%: Errors
+chkdsk %drive%: /F
+
+::IF chkdskF DONE, THEN!
+pause
+goto Opt3_Menu
+
+
+REM =====================================
+REM	== OPTION 3C =========================
+:Opt3c
+cls
+echo.
+set /p drive=Enter drive letter to scan (Example: C):
+echo Scan and Fix %drive%: (this may take time)...
+chkdsk %drive% /r
+
+::IF chkdskR DONE, THEN!
+pause
+goto Opt3_Menu
+
+
+REM =====================================
+REM	== OPTION 3D =========================
+:Opt3d
+cls
+echo.
+set /p drive=Enter drive letter to scan (Example: C):
+echo Scheduling CHKDSK on next boot for %drive%:...
+echo Restart your computer to begin the scan.
+chkdsk %drive% /f /r /x
+
+:Restart1
+echo.
+CHOICE /N /C:YN /M "Would you like to Restart NOW? [Y/N]:"%1
+IF ERRORLEVEL ==2 GOTO Opt3_Menu
+IF ERRORLEVEL ==1 GOTO RestartDO
+goto Restart1
+
+:RestartDO
+shutdown /r
+
+::IF chkdskX DONE, THEN!
+pause
+goto Opt3_Menu
+
