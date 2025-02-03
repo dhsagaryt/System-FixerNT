@@ -580,3 +580,15 @@ systemreset -factoryreset
 pause
 goto Opt7_Menu
 
+
+
+REM =====================================
+REM	== OPTION 8 ==========================
+REM =====================================
+:Opt8_Menu
+cls
+echo.
+echo Launching System Restore...
+rstrui.exe
+pause
+goto MoreOpt
