@@ -422,3 +422,78 @@ shutdown /r
 pause
 goto Opt3_Menu
 
+
+
+REM =====================================
+REM	== OPTION 4 ==========================
+REM =====================================
+:Opt4_Menu
+cls
+echo ╔═══════════════════════════════════════════════╗
+echo ║    [4] Bootrec.exe [BCD] - Boot Recovery      ║
+echo ╠═══════════════════════════════════════════════╣
+echo ║ [A] Rebuild the Master Boot Record (MBR)      ║
+echo ║ [B] Repair Boot Sector (Black Screen)         ║
+echo ║ [C] Rebuild Boot Configuration Data (BCD)     ║
+echo ║ [D] Detects all installed Operating Systems   ║
+echo ║ [N] Previous Menu                             ║
+echo ╠═══════════════════════════════════════════════╣
+CHOICE /N /C:ABCDN /M "║ Enter your choice:"%1
+echo ╚═══════════════════════════════════════════════╝
+
+:: Handle user input
+IF ERRORLEVEL ==5 GOTO homWel
+IF ERRORLEVEL ==4 GOTO Opt4d
+IF ERRORLEVEL ==3 GOTO Opt4c
+IF ERRORLEVEL ==2 GOTO Opt4b
+IF ERRORLEVEL ==1 GOTO Opt4a
+goto Opt4_Menu
+
+
+REM =====================================
+REM	== OPTION 4A =========================
+:Opt4a
+cls
+echo.
+bootrec /FixMbr
+
+::IF FixMbr DONE, THEN!
+pause
+goto Opt4_Menu
+
+
+REM =====================================
+REM	== OPTION 4B =========================
+:Opt4b
+cls
+echo.
+bootrec /FixBoot
+
+::IF FixBoot DONE, THEN!
+pause
+goto Opt4_Menu
+
+
+REM =====================================
+REM	== OPTION 4C =========================
+:Opt4c
+cls
+echo.
+bootrec /RebuildBcd
+
+::IF RebuildBcd DONE, THEN!
+pause
+goto Opt4_Menu
+
+
+REM =====================================
+REM	== OPTION 4D =========================
+:Opt4d
+cls
+echo.
+bootrec /ScanOS
+
+::IF ScanOS DONE, THEN!
+pause
+goto Opt4_Menu
+
