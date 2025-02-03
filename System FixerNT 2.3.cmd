@@ -242,3 +242,89 @@ notepad "%userprofile%\Desktop\SFC_Log.txt"
 ::IF LogsFile DONE, THEN!
 pause
 goto Opt1_Menu
+
+
+
+REM =====================================
+REM	== OPTION 2 ==========================
+REM =====================================
+:Opt2_Menu
+cls
+echo ╔══════════════════════════════════════════╗
+echo ║    [2] DISM - Servicing and Management   ║
+echo ╠══════════════════════════════════════════╣
+echo ║ [A] Repair Image (RestoreHealth)         ║
+echo ║ [B] Check Image Health (without Repair)  ║
+echo ║ [C] Scan Image for Corruption            ║
+echo ║ [D] Windows Component Store Cleanup      ║
+echo ║ [N] Previous Menu                        ║
+echo ╠══════════════════════════════════════════╣
+CHOICE /N /C:ABCDN /M "║ Enter your choice:"%1
+echo ╚══════════════════════════════════════════╝
+
+:: Handle user input
+IF ERRORLEVEL ==5 GOTO homWel
+IF ERRORLEVEL ==4 GOTO Opt2d
+IF ERRORLEVEL ==3 GOTO Opt2c
+IF ERRORLEVEL ==2 GOTO Opt2b
+IF ERRORLEVEL ==1 GOTO Opt2a
+goto Opt2_Menu
+
+
+REM =====================================
+REM	== OPTION 2A =========================
+:Opt2a
+cls
+echo.
+DISM /Online /Cleanup-Image /RestoreHealth
+
+:sfcChoice2
+echo.
+CHOICE /N /C:YN /M "After repairing, RUN SFC? [Y/N]:"%1
+IF ERRORLEVEL ==2 GOTO Opt2_Menu
+IF ERRORLEVEL ==1 GOTO sfcChoiceDO
+goto sfcChoice2
+
+:sfcChoiceDO
+sfc /scannow
+
+::IF RestoreHealth DONE, THEN!
+pause
+goto Opt2_Menu
+
+
+REM =====================================
+REM	== OPTION 2B =========================
+:Opt2b
+cls
+echo.
+DISM /Online /Cleanup-Image /CheckHealth
+
+::IF CheckHealth DONE, THEN!
+pause
+goto Opt2_Menu
+
+
+REM =====================================
+REM	== OPTION 2C =========================
+:Opt2c
+cls
+echo.
+DISM /Online /Cleanup-Image /ScanHealth
+
+::IF ScanHealth DONE, THEN!
+pause
+goto Opt2_Menu
+
+
+REM =====================================
+REM	== OPTION 2D =========================
+:Opt2d
+cls
+echo.
+DISM /Online /Cleanup-Image /StartComponentCleanup
+
+::IF StartComponentCleanup DONE, THEN!
+pause
+goto Opt2_Menu
+
