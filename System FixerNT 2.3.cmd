@@ -523,3 +523,60 @@ start ms-settings:troubleshoot
 pause
 goto MoreOpt
 
+REM =====================================
+REM	== OPTION 7 ==========================
+REM =====================================
+:Opt7_Menu
+cls
+echo ╔══════════════════════════════════════════╗
+echo ║    [7] System-Reset                      ║
+echo ╠══════════════════════════════════════════╣
+echo ║ [A] Reset while keeping files            ║
+echo ║ [B] Fully reset [Remove Everything]      ║
+echo ║ [N] Previous Menu                        ║
+echo ╠══════════════════════════════════════════╣
+CHOICE /N /C:ABM /M "║ Enter your choice:"%1
+echo ╚══════════════════════════════════════════╝
+
+:: Handle user input
+IF ERRORLEVEL ==3 GOTO MoreOpt
+IF ERRORLEVEL ==2 GOTO Opt7b
+IF ERRORLEVEL ==1 GOTO Opt7a
+goto Opt7_Menu
+
+
+REM =====================================
+REM	== OPTION 7A =========================
+:Opt7a
+cls
+echo.
+echo Resetting Windows while keeping files...
+systemreset -cleanpc
+
+::IF cleanpc DONE, THEN!
+pause
+goto Opt7_Menu
+
+
+REM =====================================
+REM	== OPTION 7B =========================
+:Opt7b
+cls
+echo.
+echo WARNING: This will remove all files and programs!
+
+:Remove1
+echo.
+CHOICE /N /C:YN /M "Are you sure you want to continue? [Y/N]:"%1
+IF ERRORLEVEL ==2 GOTO Opt7_Menu
+IF ERRORLEVEL ==1 GOTO removeDO
+goto Remove1
+
+:removeDO
+echo Resetting Windows and removing everything...
+systemreset -factoryreset
+
+::IF factoryreset DONE, THEN!
+pause
+goto Opt7_Menu
+
