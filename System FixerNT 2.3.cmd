@@ -72,3 +72,42 @@ IF ERRORLEVEL ==2 GOTO Opt2_Menu
 IF ERRORLEVEL ==1 GOTO Opt1_Menu
 goto homWel
 
+
+:MoreOpt
+cls
+echo.
+echo                                   ╔════════════════════════════╗
+echo             / \__                 ║    System FixerNT [2.3]    ║
+echo            (    @\___             ╠════════════════════════════╣
+echo            /         O            ║  [5] Memory Diagnostic     ║
+echo           /   (_____/             ║  [6] Open Troubleshoot     ║
+echo          /_____/   U              ║  [7] System-Reset          ║
+echo             ^|^|                    ║  [8] Rstrui.exe [Restore]  ║
+echo                                   ║  ^|N^| Previous Options      ║
+echo                                   ╚════════════════════════════╝
+echo.
+echo.
+echo     .-"^`\                                        /`^"-.
+echo   .'   ___\                                      /___   `.
+echo  /    /.---.                                    .---.\    \
+echo ^|    //     '-.  ___________________________ .-'     \\    ^|
+echo ^|   ;^|         \/--------------------------//         ^|;   ^|
+echo \   ^|^|       ^|\_)        Ocean Web         (_/^|       ^|^|   /
+echo  \  ^| \  . \ ;  ^|    Solution @dhsagaryt   ^|^| ; / .  / ^|  /
+echo   '\_\ \\ \ \ \ ^|                          ^|^|/ / / // /_/'
+echo         \\ \ \ \^|    System FixerNT 2.3    ^|/ / / //
+echo          `'-\_\_\      by Sagar Mondal     /_/_/-'`
+echo                 '--------------------------'
+echo.
+
+:: Prompt for user input
+CHOICE /N /C:5678N /M "Choose an option (5-8):"%1
+
+:: Handle user input
+IF ERRORLEVEL ==5 GOTO homWel
+IF ERRORLEVEL ==4 GOTO Opt8_Menu
+IF ERRORLEVEL ==3 GOTO Opt7_Menu
+IF ERRORLEVEL ==2 GOTO Opt6_Menu
+IF ERRORLEVEL ==1 GOTO Opt5_Menu
+goto MoreOpt
+
