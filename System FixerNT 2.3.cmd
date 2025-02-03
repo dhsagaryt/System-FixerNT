@@ -510,3 +510,16 @@ mdsched.exe
 pause
 goto MoreOpt
 
+
+
+REM =====================================
+REM	== OPTION 6 ==========================
+REM =====================================
+:Opt6_Menu
+cls
+echo.
+echo The Windows Built-In Troubleshoot:
+start ms-settings:troubleshoot
+pause
+goto MoreOpt
+
