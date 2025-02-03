@@ -15,3 +15,11 @@ if %errorLevel% NEQ 0 (
     pause
     exit
 )
+
+:: Program File Check!!
+IF NOT "%~n0"=="%proName% %proVer%" (
+    ECHO Incorrect Namespace! This program made by %autName%".
+    ECHO Exiting...
+    pause
+    exit
+)
